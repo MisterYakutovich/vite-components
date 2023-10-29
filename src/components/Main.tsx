@@ -9,6 +9,7 @@ interface SearchState {
 }
 interface BeerProps {
   searchName:string[]
+  arrResult:string[]
 }
 interface BeersArray {
   name:string;
@@ -32,7 +33,6 @@ class Main extends React.Component<BeerProps, SearchState> {
           .then(res => res.json())
           .then(
             (result) => {
-              console.log(result)
               this.setState({
                 isLoaded: true,
                 items: result             
@@ -44,12 +44,15 @@ class Main extends React.Component<BeerProps, SearchState> {
               });
             }            
           )
-      } 
+      }
    render() {
-
+    
 const arr:BeersArray[]=this.state.items;
-const arrSearch:BeersArray[]=this.props.searchName;
-
+const arrSearch:BeersSearch[]=this.props.searchName;
+const arrResult:BeersSearch[]=this.props.arrResult;
+if (arrSearch.length === 0) {
+  arrSearch.push(...arrResult);
+}
      return(     
       <section className="section-main">
        <div className="container">
@@ -64,8 +67,7 @@ const arrSearch:BeersArray[]=this.props.searchName;
           <div key={i.id} className="card">
             <img className="card_img" key={i.image_url} src={i.image_url} alt=""></img>
             <p key={i.name} className="card_title">{i.name}</p>
-          </div>  
-       
+          </div>        
        )))}
        </div>
       </section>

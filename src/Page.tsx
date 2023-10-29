@@ -7,6 +7,7 @@ interface PageBeers {
   beer: Beer[];
   movie: Beer;
   loading: boolean;
+  result:string[]
 }
 interface Beer {
   
@@ -17,6 +18,7 @@ class Page extends React.Component<Record<string, never>, PageBeers> {
     beer: [],
     movie: {},
     loading: true,
+    result:[]  
 }
 handleEnter = (search:string):void => {
   if (search.trim() === "") return;
@@ -31,15 +33,22 @@ handleEnter = (search:string):void => {
       .then(data => {
           this.setState({
               beer: data, 
-              loading: false
+              loading: false,
           });
-      });
+          localStorage.setItem('key',JSON.stringify(this.state.beer));
+      });    
+}
+componentDidMount() {
+  const localData = localStorage.getItem('key');
+  const result = localData ? JSON.parse(localData) : []; 
+  this.setState( {result} );
 }
   render(){
     return(
     <>
        <Seach enterHandler={this.handleEnter}/>
-       <Main searchName={this.state.beer}/>       
+       <Main searchName={this.state.beer}
+             arrResult={this.state.result}/>       
     </>
     )
 }
