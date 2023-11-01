@@ -50,6 +50,7 @@ class Main extends React.Component<BeerProps, SearchState> {
     if (arrSearch.length === 0) {
       arrSearch.push(...arrResult);
     }
+    console.log(arr)
     return (
       <section className="section-main">
         <div className="container">

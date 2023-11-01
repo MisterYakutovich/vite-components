@@ -8,6 +8,7 @@ interface PageBeers {
   loading: boolean;
   result: string[];
 }
+
 class Page extends React.Component<Record<string, never>, PageBeers> {
   state: PageBeers = {
     show: 'index',
@@ -27,7 +28,7 @@ class Page extends React.Component<Record<string, never>, PageBeers> {
       show: 'search',
     });
     search = encodeURIComponent(search);
-    const url = `https://api.punkapi.com/v2/beers?brewed_before=11-2012&beer_name=${search}`;
+    const url = `https://api.punkapi.com/v2/beers?beer_name=${search}`;
     fetch(url)
       .then((response) => response.json())
       .then((data) => {
