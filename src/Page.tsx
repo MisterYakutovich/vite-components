@@ -4,11 +4,10 @@ import Main from './components/Main';
 
 interface PageBeers {
   show: string;
-  beer: Beer[];
+  beer: string[];
   loading: boolean;
   result: string[];
 }
-interface Beer {}
 class Page extends React.Component<Record<string, never>, PageBeers> {
   state: PageBeers = {
     show: 'index',
@@ -34,9 +33,9 @@ class Page extends React.Component<Record<string, never>, PageBeers> {
       .then((data) => {
         this.setState({
           beer: data,
-          loading: false,
-        });
-        localStorage.setItem('key', JSON.stringify(this.state.beer));
+          loading: false       
+        });        
+        localStorage.setItem('key', JSON.stringify(data));    
       });
   };
 
