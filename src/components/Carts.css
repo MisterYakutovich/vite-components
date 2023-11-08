@@ -3,6 +3,8 @@
 }
 .card {
   background-color: aliceblue;
+  border: 3px solid #7922cc;
+  border-radius: 25px;
 }
 .card_img {
   width: 100px;
@@ -12,16 +14,15 @@
 }
 .card p {
   width: 100%;
-
   margin-left: auto;
   margin-right: auto;
   font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-size: 25px;
-
   color: #717171;
   text-align: center;
+  text-decoration: none;
 }
 .container {
   position: relative;
