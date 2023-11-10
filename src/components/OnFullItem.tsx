@@ -1,9 +1,9 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './OnFullItem.css';
 import Seach from './Seach';
-import BeersArray from '../App';
 import CartsOnePage from './CartsOnePage';
+import { ThemeContext } from '../App';
 
 interface BeersArray {
   name: string;
@@ -11,12 +11,15 @@ interface BeersArray {
   id: string;
   loading: boolean;
 }
+[];
+
 function OnFullItem() {
+  const itemsBeers = useContext(ThemeContext);
+  console.log(itemsBeers);
   const { id } = useParams();
   const navigate = useNavigate();
-
   const [, setIsError] = useState<boolean>(false);
-  const [items, setItems] = useState<BeersArray[]>([]);
+  const [item, setItems] = useState<BeersArray[]>([]);
   const [isActive] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
   useEffect(() => {
@@ -33,16 +36,15 @@ function OnFullItem() {
         alert(error);
       });
   }, [id]);
-
-//  const handleClickStyle = (): void => {
- //  setIsActive((isActive) => !isActive);
-//  };
+  const handleClose = () => {
+    navigate(-1);
+  };
 
   return (
     <section className="section-container">
       {loading && <span className="loader"></span>}
       <div className="container-onfullitem">
-        <div onClick={() => navigate(-1)} className="close_onfullitem">
+        <div onClick={handleClose} className="close_onfullitem">
           <svg
             width="32"
             height="32"
@@ -67,7 +69,7 @@ function OnFullItem() {
         </div>
 
         {!loading &&
-          items.map((i) => (
+          item.map((i) => (
             <div key={i.id} className="cart_onfullitem">
               <img
                 className="cart_img_onfullitem"
@@ -89,7 +91,7 @@ function OnFullItem() {
         }}
       />
 
-      <CartsOnePage />
+      <CartsOnePage handleClose={handleClose} />
     </section>
   );
 }

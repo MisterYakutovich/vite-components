@@ -31,7 +31,7 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   grid-template-rows: repeat(3, 450px);
   column-gap: 40px;
-  row-gap: 30px;
+  row-gap: 90px;
   height: 950px;
 }
 .loader {

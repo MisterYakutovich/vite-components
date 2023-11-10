@@ -1,19 +1,17 @@
-import { useState, useEffect } from 'react';
-import { BeersSearch } from './Carts';
+import { useContext } from 'react';
 import './CartOnePage.css';
+import { ThemeContext } from '../App';
 
-function CartsOnePage() {
-  const [temp, setTemp] = useState<BeersSearch[]>([]);
-  useEffect(() => {
-    fetch('https://api.punkapi.com/v2/beers?page=2&per_page=10')
-      .then((res) => res.json())
-      .then((result) => setTemp(result));
-  }, []);
+interface CartOnePageProps {
+  handleClose: () => void;
+}
 
+function CartsOnePage({ handleClose }: CartOnePageProps) {
+  const itemsBeers = useContext(ThemeContext);
   return (
     <section className="section-cartsonepage">
-      <div className="cartsonepage_container">
-        {temp.map((i) => (
+      <div className="cartsonepage_container" onClick={handleClose}>
+        {itemsBeers?.currentBeers.map((i) => (
           <div key={i.id} className="cartsonepage_cart">
             <img
               className="cartsonepage_cart_img"

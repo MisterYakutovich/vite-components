@@ -1,25 +1,32 @@
 import { useState, useEffect } from 'react';
 import Seach from './components/Seach';
 import Carts from './components/Carts';
+import Paginations from './components/paginatons/Paginations';
+import { BeersArray } from './App';
 
-interface PageBeers {
+export interface PageBeers {
   show: string;
   beer: string[];
   loading: boolean;
   result: string[];
   localData: string;
 }
+export interface BeersSearch {
+  name: string;
+  image_url: string;
+  id: string;
+}
 interface PageProps {
   handleClickStyle: (search: string) => void;
   isActive: boolean;
+  items: BeersArray[] | undefined;
 }
 
-function Page({ handleClickStyle, isActive }: PageProps) {
+function Page({ handleClickStyle, isActive, items }: PageProps) {
   const [, setShow] = useState<string>('index');
   const [beer, setBeer] = useState<PageBeers[]>([]);
   const [result, setResult] = useState<PageBeers[]>([]);
   const [, setLoading] = useState<boolean>(true);
-
   useEffect(() => {
     const localData = localStorage.getItem('key');
     const result = localData ? JSON.parse(localData) : [];
@@ -44,15 +51,14 @@ function Page({ handleClickStyle, isActive }: PageProps) {
 
   return (
     <>
-      <Seach
-        enterHandler={handleEnter}
-        isActive={isActive}
-      />
+      <Seach enterHandler={handleEnter} isActive={isActive} />
+      <Paginations />
       <Carts
         searchName={beer}
         arrResult={result}
         handleClickStyle={handleClickStyle}
         isActive={isActive}
+        items={items}
       />
     </>
   );
