@@ -89,6 +89,10 @@ function OnFullItem() {
         enterHandler={function (): void {
           throw new Error('Function not implemented.');
         }}
+        search={''}
+        setSearch={function (): void {
+          throw new Error('Function not implemented.');
+        }}
       />
 
       <CartsOnePage handleClose={handleClose} />

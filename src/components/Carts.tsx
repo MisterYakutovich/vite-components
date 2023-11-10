@@ -9,6 +9,7 @@ interface BeerProps {
   arrResult: BeersSearch[];
   isActive: boolean;
   items: BeersArray[] | undefined;
+  handleClickStyle: (search: string) => void;
 }
 
 function Cart({ searchName, arrResult, isActive, items }: BeerProps) {

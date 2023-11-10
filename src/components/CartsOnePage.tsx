@@ -8,6 +8,7 @@ interface CartOnePageProps {
 
 function CartsOnePage({ handleClose }: CartOnePageProps) {
   const itemsBeers = useContext(ThemeContext);
+
   return (
     <section className="section-cartsonepage">
       <div className="cartsonepage_container" onClick={handleClose}>

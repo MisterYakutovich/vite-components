@@ -19,6 +19,7 @@ export interface IContext {
 }
 
 export const ThemeContext = createContext<null | IContext>(null);
+export const ItemsProvaider = ThemeContext.Provider;
 const router = createBrowserRouter([
   {
     path: `/`,
@@ -46,7 +47,7 @@ function App(): ReactNode {
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => prev - 1);
   return (
-    <ThemeContext.Provider
+    <ItemsProvaider
       value={{
         itemsBeers,
         currentPage,
@@ -58,7 +59,7 @@ function App(): ReactNode {
       }}
     >
       <RouterProvider router={router} />
-    </ThemeContext.Provider>
+    </ItemsProvaider>
   );
 }
 

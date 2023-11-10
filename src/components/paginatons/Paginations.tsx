@@ -3,10 +3,10 @@ import './Paginatins.css';
 import { IContext, ThemeContext } from '../../App';
 
 function Paginations() {
-  const itemsBeers = useContext<null | IContext>(ThemeContext);
-  console.log(typeof itemsBeers?.currentPage);
+  const context = useContext<null | IContext>(ThemeContext);
+
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    itemsBeers?.setBeersPerPage(event.target.value);
+    context?.setBeersPerPage(event.target.value);
   };
   return (
     <div className="navigation">
@@ -17,7 +17,7 @@ function Paginations() {
           id="items-per-page"
           min="1"
           max="80"
-          value={itemsBeers?.beersPerPage}
+          value={context?.beersPerPage}
           onChange={handleChange}
           // onKeyDown={handleEnter}
         />
@@ -27,8 +27,8 @@ function Paginations() {
       </form>
       <button
         className="button"
-        onClick={itemsBeers?.prevPage}
-        disabled={itemsBeers?.currentPage === 1}
+        onClick={context?.prevPage}
+        disabled={context?.currentPage === 1}
       >
         <div className="two">
           <svg
@@ -47,15 +47,15 @@ function Paginations() {
       </button>
 
       <div className="button_arrow_right_number">
-        <h4>{itemsBeers?.currentPage}</h4>
+        <h4>{context?.currentPage}</h4>
       </div>
 
       <button
         className="button"
-        onClick={itemsBeers?.nextPage}
+        onClick={context?.nextPage}
         disabled={
-          itemsBeers!.currentPage! >=
-          itemsBeers!.itemsBeers.length! / +itemsBeers!.beersPerPage!
+          context!.currentPage! >=
+          context!.itemsBeers.length! / +context!.beersPerPage!
         }
       >
         <div className="two">

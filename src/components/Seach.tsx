@@ -1,13 +1,16 @@
-import React, { useState } from 'react';
+import React, { useContext } from 'react';
 import './Seach.css';
+import { SearchContext } from './main/Main';
 
 interface SearchProps {
   enterHandler: (search: string) => void;
   isActive: boolean;
+  search: string;
+  setSearch: (search: string) => void;
 }
-function Seach({ enterHandler, isActive }: SearchProps) {
-  const [search, setSearch] = useState<string>('');
-
+function Seach({ enterHandler, isActive, search, setSearch }: SearchProps) {
+  const searchContext = useContext<null | string>(SearchContext);
+  console.log(searchContext);
   const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       enterHandler(search);
@@ -16,7 +19,6 @@ function Seach({ enterHandler, isActive }: SearchProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
-  console.log(isActive);
   return (
     <>
       {isActive ? (
