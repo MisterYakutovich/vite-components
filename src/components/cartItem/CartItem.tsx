@@ -1,4 +1,4 @@
-import { BeersSearch } from '../Page';
+import { BeersSearch } from '../../Page';
 
 export interface ProfilesProps {
   i: BeersSearch;

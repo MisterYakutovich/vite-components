@@ -1,8 +1,8 @@
 import './Carts.css';
-import CartItem from './CartItem';
+import CartItem from '../cartItem/CartItem';
 import { NavLink } from 'react-router-dom';
-import { BeersArray } from '../App';
-import { BeersSearch } from '../Page';
+import { BeersArray } from '../../App';
+import { BeersSearch } from '../../Page';
 
 interface BeerProps {
   searchName: BeersSearch[];

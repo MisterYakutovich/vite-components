@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import './Seach.css';
-import { SearchContext } from './main/Main';
+import { SearchContext } from '../main/Main';
 
 interface SearchProps {
   enterHandler: (search: string) => void;

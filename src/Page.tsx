@@ -1,4 +1,4 @@
-import Carts from './components/Carts';
+import Carts from './components/carts/Carts';
 import Paginations from './components/paginatons/Paginations';
 import { BeersArray } from './App';
 

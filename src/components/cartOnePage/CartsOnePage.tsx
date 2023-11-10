@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 import './CartOnePage.css';
-import { ThemeContext } from '../App';
+import { ThemeContext } from '../../App';
 
 interface CartOnePageProps {
   handleClose: () => void;

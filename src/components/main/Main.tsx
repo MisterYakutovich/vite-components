@@ -1,7 +1,7 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import Page from '../../Page';
 import { ThemeContext, IContext } from '../../App';
-import Seach from '../Seach';
+import Seach from '../search/Seach';
 
 export interface BeersArray {
   name: string;

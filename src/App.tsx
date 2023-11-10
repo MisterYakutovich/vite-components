@@ -1,6 +1,6 @@
 import { ReactNode, createContext, useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
-import OnFullItem from './components/OnFullItem';
+import OnFullItem from './components/onFullItem/OnFullItem';
 import Main from './components/main/Main';
 
 export interface BeersArray {

@@ -1,9 +1,9 @@
 import { useState, useEffect, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './OnFullItem.css';
-import Seach from './Seach';
-import CartsOnePage from './CartsOnePage';
-import { ThemeContext } from '../App';
+import Seach from '../search/Seach';
+import CartsOnePage from '../cartOnePage/CartsOnePage';
+import { ThemeContext } from '../../App';
 
 interface BeersArray {
   name: string;
