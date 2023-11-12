@@ -10,9 +10,9 @@ export interface BeersArray {
 }
 export interface PageBeers {
   show: string;
-  beer: string[];
+  beer: BeersArray[];
+  result: BeersArray[];
   loading: boolean;
-  result: string[];
   localData: string;
 }
 export const SearchContext = createContext<null | string>(null);
@@ -21,8 +21,8 @@ function Main() {
   const context = useContext<null | IContext>(ThemeContext);
   const [search, setSearch] = useState<string>('');
   const [, setShow] = useState<string>('index');
-  const [beer, setBeer] = useState<PageBeers[]>([]);
-  const [result, setResult] = useState<PageBeers[]>([]);
+  const [beer, setBeer] = useState<BeersArray[]>([]);
+  const [result, setResult] = useState<BeersArray[]>([]);
   const [, setLoading] = useState<boolean>(true);
   useEffect(() => {
     const localData = localStorage.getItem('key');
@@ -52,7 +52,6 @@ function Main() {
         <Seach
           enterHandler={handleEnter}
           isActive={false}
-          search={search}
           setSearch={setSearch}
         />
         <Page
@@ -60,7 +59,7 @@ function Main() {
             throw new Error('Function not implemented.');
           }}
           isActive={false}
-          items={context?.currentBeers} // 10number
+          items={context?.currentBeers}
           searchName={beer}
           arrResult={result}
         />

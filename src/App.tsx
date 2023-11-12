@@ -2,6 +2,7 @@ import { ReactNode, createContext, useEffect, useState } from 'react';
 import { RouterProvider, createBrowserRouter } from 'react-router-dom';
 import OnFullItem from './components/onFullItem/OnFullItem';
 import Main from './components/main/Main';
+import Page_404 from './Page_404';
 
 export interface BeersArray {
   name: string;
@@ -28,6 +29,10 @@ const router = createBrowserRouter([
   {
     path: `ids=/:id`,
     element: <OnFullItem />,
+  },
+  {
+    path: '*',
+    element: <Page_404 />,
   },
 ]);
 

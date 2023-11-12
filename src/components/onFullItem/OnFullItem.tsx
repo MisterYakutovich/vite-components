@@ -1,9 +1,8 @@
-import { useState, useEffect, useContext } from 'react';
+import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import './OnFullItem.css';
 import Seach from '../search/Seach';
 import CartsOnePage from '../cartOnePage/CartsOnePage';
-import { ThemeContext } from '../../App';
 
 interface BeersArray {
   name: string;
@@ -14,8 +13,6 @@ interface BeersArray {
 [];
 
 function OnFullItem() {
-  const itemsBeers = useContext(ThemeContext);
-  console.log(itemsBeers);
   const { id } = useParams();
   const navigate = useNavigate();
   const [, setIsError] = useState<boolean>(false);
@@ -89,7 +86,6 @@ function OnFullItem() {
         enterHandler={function (): void {
           throw new Error('Function not implemented.');
         }}
-        search={''}
         setSearch={function (): void {
           throw new Error('Function not implemented.');
         }}

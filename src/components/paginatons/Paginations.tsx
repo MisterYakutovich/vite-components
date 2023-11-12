@@ -4,7 +4,7 @@ import { IContext, ThemeContext } from '../../App';
 
 function Paginations() {
   const context = useContext<null | IContext>(ThemeContext);
-
+  const numberPage = context!.currentPage!;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     context?.setBeersPerPage(event.target.value);
   };
@@ -20,6 +20,7 @@ function Paginations() {
           value={context?.beersPerPage}
           onChange={handleChange}
           // onKeyDown={handleEnter}
+          placeholder="Number of cards per page"
         />
         <button type="submit" className="change_button">
           Change items number
@@ -28,7 +29,7 @@ function Paginations() {
       <button
         className="button"
         onClick={context?.prevPage}
-        disabled={context?.currentPage === 1}
+        disabled={numberPage === 1}
       >
         <div className="two">
           <svg
@@ -47,15 +48,14 @@ function Paginations() {
       </button>
 
       <div className="button_arrow_right_number">
-        <h4>{context?.currentPage}</h4>
+        <h4>{numberPage}</h4>
       </div>
 
       <button
         className="button"
         onClick={context?.nextPage}
         disabled={
-          context!.currentPage! >=
-          context!.itemsBeers.length! / +context!.beersPerPage!
+          numberPage >= context!.itemsBeers.length! / +context!.beersPerPage!
         }
       >
         <div className="two">

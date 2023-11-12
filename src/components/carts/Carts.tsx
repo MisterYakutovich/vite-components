@@ -23,6 +23,7 @@ function Cart({ searchName, arrResult, isActive, items }: BeerProps) {
         {searchName.length == 0
           ? items?.map((i) => (
               <NavLink
+                data-testid="link-cart"
                 key={i.id}
                 to={`ids=/${i.id}`}
                 style={{ textDecoration: 'none' }}

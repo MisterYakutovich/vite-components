@@ -11,8 +11,10 @@ interface PageProps {
   handleClickStyle: (search: string) => void;
   isActive: boolean;
   items: BeersArray[] | undefined;
-  searchName: BeersSearch[];
-  arrResult: BeersSearch[];
+  searchName: BeersArray[];
+  arrResult: BeersArray[];
+  // searchName: BeersSearch[];
+  // arrResult: BeersSearch[];
 }
 
 function Page({
