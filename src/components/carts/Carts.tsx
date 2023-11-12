@@ -23,7 +23,6 @@ function Cart({ searchName, arrResult, isActive, items }: BeerProps) {
         {searchName.length == 0
           ? items?.map((i) => (
               <NavLink
-                data-testid="link-cart"
                 key={i.id}
                 to={`ids=/${i.id}`}
                 style={{ textDecoration: 'none' }}
@@ -31,7 +30,7 @@ function Cart({ searchName, arrResult, isActive, items }: BeerProps) {
                   isPending ? 'pending' : isActive ? 'active-linc' : ''
                 }
               >
-                <CartItem key={i.id} i={i} isActive={isActive} />
+                <CartItem key={i.id} i={i} isActive={isActive}/>
               </NavLink>
             ))
           : searchName.map((i) => (

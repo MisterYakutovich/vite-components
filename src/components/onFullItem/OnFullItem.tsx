@@ -40,7 +40,7 @@ function OnFullItem() {
   return (
     <section className="section-container">
       {loading && <span className="loader"></span>}
-      <div className="container-onfullitem">
+      <div className="container-onfullitem" >
         <div onClick={handleClose} className="close_onfullitem">
           <svg
             width="32"

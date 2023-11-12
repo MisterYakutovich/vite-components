@@ -17,6 +17,7 @@ function Seach({ enterHandler, isActive, setSearch }: SearchProps) {
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearch(event.target.value);
   };
+ 
   return (
     <>
       {isActive ? (

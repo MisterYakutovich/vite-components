@@ -13,8 +13,6 @@ interface PageProps {
   items: BeersArray[] | undefined;
   searchName: BeersArray[];
   arrResult: BeersArray[];
-  // searchName: BeersSearch[];
-  // arrResult: BeersSearch[];
 }
 
 function Page({

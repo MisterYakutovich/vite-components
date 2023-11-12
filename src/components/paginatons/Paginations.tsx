@@ -6,7 +6,7 @@ function Paginations() {
   const context = useContext<null | IContext>(ThemeContext);
   const numberPage = context!.currentPage!;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    context?.setBeersPerPage(event.target.value);
+    context!.setBeersPerPage(event.target.value);
   };
   return (
     <div className="navigation">
