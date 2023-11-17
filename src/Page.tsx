@@ -1,4 +1,4 @@
-import Carts from './components/Carts';
+import Carts from './components/carts/Carts';
 import Paginations from './components/paginatons/Paginations';
 import { BeersArray } from './App';
 
@@ -11,8 +11,8 @@ interface PageProps {
   handleClickStyle: (search: string) => void;
   isActive: boolean;
   items: BeersArray[] | undefined;
-  searchName: BeersSearch[];
-  arrResult: BeersSearch[];
+  searchName: BeersArray[];
+  arrResult: BeersArray[];
 }
 
 function Page({

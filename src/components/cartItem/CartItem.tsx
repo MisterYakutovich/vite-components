@@ -1,4 +1,4 @@
-import { BeersSearch } from '../Page';
+import { BeersSearch } from '../../Page';
 
 export interface ProfilesProps {
   i: BeersSearch;
@@ -13,7 +13,7 @@ function CartItem(props: ProfilesProps) {
   }
 
   return (
-    <div key={props.i.id} className="card">
+    <div key={props.i.id} className="card" data-testid="map">
       <img
         className="card_img"
         key={props.i.image_url}

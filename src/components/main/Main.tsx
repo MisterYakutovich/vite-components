@@ -1,7 +1,8 @@
 import { createContext, useContext, useEffect, useState } from 'react';
 import Page from '../../Page';
 import { ThemeContext, IContext } from '../../App';
-import Seach from '../Seach';
+import Seach from '../search/Seach';
+import { STORAGE_KEY } from '../../model/consts';
 
 export interface BeersArray {
   name: string;
@@ -10,22 +11,23 @@ export interface BeersArray {
 }
 export interface PageBeers {
   show: string;
-  beer: string[];
+  beer: BeersArray[];
+  result: BeersArray[];
   loading: boolean;
-  result: string[];
   localData: string;
 }
 export const SearchContext = createContext<null | string>(null);
 
 function Main() {
+  const searchKey = `${STORAGE_KEY}`;
   const context = useContext<null | IContext>(ThemeContext);
   const [search, setSearch] = useState<string>('');
   const [, setShow] = useState<string>('index');
-  const [beer, setBeer] = useState<PageBeers[]>([]);
-  const [result, setResult] = useState<PageBeers[]>([]);
+  const [beer, setBeer] = useState<BeersArray[]>([]);
+  const [result, setResult] = useState<BeersArray[]>([]);
   const [, setLoading] = useState<boolean>(true);
   useEffect(() => {
-    const localData = localStorage.getItem('key');
+    const localData = localStorage.getItem(searchKey);
     const result = localData ? JSON.parse(localData) : [];
     if (localData) {
       setResult(result);
@@ -42,7 +44,7 @@ function Main() {
       .then((data) => {
         setBeer(data);
         setLoading(false);
-        localStorage.setItem('key', JSON.stringify(data));
+        localStorage.setItem(searchKey, JSON.stringify(data));
       });
   };
 
@@ -52,7 +54,6 @@ function Main() {
         <Seach
           enterHandler={handleEnter}
           isActive={false}
-          search={search}
           setSearch={setSearch}
         />
         <Page
@@ -60,7 +61,7 @@ function Main() {
             throw new Error('Function not implemented.');
           }}
           isActive={false}
-          items={context?.currentBeers} // 10number
+          items={context?.currentBeers}
           searchName={beer}
           arrResult={result}
         />
