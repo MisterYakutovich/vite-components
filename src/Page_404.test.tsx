@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import { render,screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import Page_404 from './Page_404';
 
@@ -13,5 +13,5 @@ test('renders 404 page when navigating to incorrect route', () => {
   );
   const notFoundText = getByText('Error page');
   expect(notFoundText).toBeInTheDocument();
-  screen.debug()
+  screen.debug();
 });

@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from 'react';
 import Page from '../../Page';
 import { ThemeContext, IContext } from '../../App';
 import Seach from '../search/Seach';
+import { STORAGE_KEY } from '../../model/consts';
 
 export interface BeersArray {
   name: string;
@@ -18,6 +19,7 @@ export interface PageBeers {
 export const SearchContext = createContext<null | string>(null);
 
 function Main() {
+  const searchKey = `${STORAGE_KEY}`;
   const context = useContext<null | IContext>(ThemeContext);
   const [search, setSearch] = useState<string>('');
   const [, setShow] = useState<string>('index');
@@ -25,7 +27,7 @@ function Main() {
   const [result, setResult] = useState<BeersArray[]>([]);
   const [, setLoading] = useState<boolean>(true);
   useEffect(() => {
-    const localData = localStorage.getItem('key');
+    const localData = localStorage.getItem(searchKey);
     const result = localData ? JSON.parse(localData) : [];
     if (localData) {
       setResult(result);
@@ -42,7 +44,7 @@ function Main() {
       .then((data) => {
         setBeer(data);
         setLoading(false);
-        localStorage.setItem('key', JSON.stringify(data));
+        localStorage.setItem(searchKey, JSON.stringify(data));
       });
   };
 

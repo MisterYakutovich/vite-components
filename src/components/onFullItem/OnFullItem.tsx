@@ -25,7 +25,6 @@ function OnFullItem() {
       .then((res) => res.json())
       .then((result) => {
         setItems(result);
-        console.log(result);
         if (result.length > 0) setLoading(false);
       })
       .catch((error) => {
@@ -40,7 +39,7 @@ function OnFullItem() {
   return (
     <section className="section-container">
       {loading && <span className="loader"></span>}
-      <div className="container-onfullitem" >
+      <div className="container-onfullitem">
         <div onClick={handleClose} className="close_onfullitem">
           <svg
             width="32"
