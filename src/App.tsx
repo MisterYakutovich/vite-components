@@ -4,6 +4,7 @@ import OnFullItem from './components/onFullItem/OnFullItem';
 import Main from './components/main/Main';
 import Page_404 from './Page_404';
 
+
 export interface BeersArray {
   name: string;
   image_url: string;
