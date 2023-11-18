@@ -1,14 +1,15 @@
 import './Carts.css';
 import CartItem from '../cartItem/CartItem';
 import { NavLink } from 'react-router-dom';
-import { BeersArray } from '../../App';
+
 import { BeersSearch } from '../../Page';
+import { BeersArray } from '../../types/types';
 
 interface BeerProps {
   searchName: BeersSearch[];
   arrResult: BeersSearch[];
   isActive: boolean;
-  items: BeersArray[] | undefined;
+  items: BeersArray[]; //| undefined;
   handleClickStyle: (search: string) => void;
 }
 

@@ -1,23 +1,19 @@
-import { useContext } from 'react';
 import './Seach.css';
-import { SearchContext } from '../main/Main';
 
 interface SearchProps {
   enterHandler: (search: string) => void;
   isActive: boolean;
-  setSearch: (search: string) => void;
+  search: string;
+  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleEnter: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
-function Seach({ enterHandler, isActive, setSearch }: SearchProps) {
-  const searchContext = useContext<null | string>(SearchContext);
-  const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === 'Enter') {
-      enterHandler(searchContext!);
-    }
-  };
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(event.target.value);
-  };
-
+function Seach({
+  enterHandler,
+  isActive,
+  handleChange,
+  handleEnter,
+  search,
+}: SearchProps) {
   return (
     <>
       {isActive ? (
@@ -25,14 +21,14 @@ function Seach({ enterHandler, isActive, setSearch }: SearchProps) {
           <div className="input-field_newstyle colnewstyle s12newstyle">
             <input
               type="text_newstyle"
-              value={searchContext!}
+              value={search}
               onChange={handleChange}
               onKeyUp={handleEnter}
               placeholder="Enter the name of the beer"
             />
             <button
               className="btn_newstyle"
-              onClick={() => enterHandler(searchContext!)}
+              onClick={() => enterHandler(search)}
             >
               Search
             </button>
@@ -43,15 +39,12 @@ function Seach({ enterHandler, isActive, setSearch }: SearchProps) {
           <div className="input-field col s12">
             <input
               type="text"
-              value={searchContext!}
+              value={search}
               onChange={handleChange}
               onKeyUp={handleEnter}
               placeholder="Enter the name of the beer"
             />
-            <button
-              className="btn"
-              onClick={() => enterHandler(searchContext!)}
-            >
+            <button className="btn" onClick={() => enterHandler(search)}>
               Search
             </button>
           </div>

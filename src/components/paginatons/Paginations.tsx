@@ -1,12 +1,28 @@
-import { useContext } from 'react';
 import './Paginatins.css';
-import { IContext, ThemeContext } from '../../App';
 
-function Paginations() {
-  const context = useContext<null | IContext>(ThemeContext);
-  const numberPage = context!.currentPage!;
+import { BeersArray } from '../main/Main';
+
+interface PaginationsProps {
+  setBeersPerPage: (event: string) => void;
+  currentPage: number;
+  beersPerPage: string;
+  itemsBeers: BeersArray[];
+  nextPage: () => void;
+  prevPage: () => void;
+}
+
+function Paginations({
+  setBeersPerPage,
+  currentPage,
+  beersPerPage,
+  itemsBeers,
+  nextPage,
+  prevPage,
+}: PaginationsProps) {
+  //const context = useContext<null | IContext>(ThemeContext);
+  // const numberPage = context!.currentPage!;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    context!.setBeersPerPage(event.target.value);
+    setBeersPerPage(event.target.value);
   };
   return (
     <div className="navigation">
@@ -17,7 +33,7 @@ function Paginations() {
           id="items-per-page"
           min="1"
           max="80"
-          value={context?.beersPerPage}
+          value={beersPerPage}
           onChange={handleChange}
           // onKeyDown={handleEnter}
           placeholder="Number of cards per page"
@@ -28,8 +44,8 @@ function Paginations() {
       </form>
       <button
         className="button"
-        onClick={context?.prevPage}
-        disabled={numberPage === 1}
+        onClick={prevPage}
+        disabled={currentPage === 1}
       >
         <div className="two">
           <svg
@@ -48,15 +64,13 @@ function Paginations() {
       </button>
 
       <div className="button_arrow_right_number">
-        <h4>{numberPage}</h4>
+        <h4>{currentPage}</h4>
       </div>
 
       <button
         className="button"
-        onClick={context?.nextPage}
-        disabled={
-          numberPage >= context!.itemsBeers.length! / +context!.beersPerPage!
-        }
+        onClick={nextPage}
+        disabled={currentPage >= itemsBeers.length / +beersPerPage}
       >
         <div className="two">
           <svg

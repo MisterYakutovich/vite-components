@@ -36,6 +36,7 @@ function OnFullItem() {
     navigate(-1);
   };
 
+
   return (
     <section className="section-container">
       {loading && <span className="loader"></span>}
@@ -80,15 +81,7 @@ function OnFullItem() {
           ))}
       </div>
 
-      <Seach
-        isActive={isActive}
-        enterHandler={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        setSearch={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
+      <Seach isActive={isActive}/>
 
       <CartsOnePage handleClose={handleClose} />
     </section>
