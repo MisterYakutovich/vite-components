@@ -3,7 +3,7 @@ import Page from '../../Page';
 import Seach from '../search/Seach';
 import { STORAGE_KEY } from '../../model/consts';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSearch } from '../../redux/slices/searchSlice';
+import { setSearch } from '../../redux/slices/stateSearchSlice';
 import { RootState } from '../../redux/store';
 
 export interface BeersArray {
@@ -21,19 +21,7 @@ export interface PageBeers {
 
 function Main() {
   const search = useSelector((state: RootState) => state.input.search);
-  //  const beer = useSelector((state: RootState)=>state.input.beer)
 
-
- // const [searchTerm] = useState('');
- // const arr = [];
- // const { data, error, isLoading, refetch } = useGetDataNameQuery(searchTerm);
- // arr.push(data);
- // const beersearch = arr.flat();
- // console.log(beersearch)
- // useEffect(() => {
-    // Обновление данных при изменении поиска или элементов на странице
-  //  refetch();
-  //}, [searchTerm]);
   const dispatch = useDispatch();
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearch(e.target.value));
@@ -45,6 +33,7 @@ function Main() {
   const [beer, setBeer] = useState<BeersArray[]>([]);
   const [result, setResult] = useState<BeersArray[]>([]);
   const [, setLoading] = useState<boolean>(true);
+
   useEffect(() => {
     const localData = localStorage.getItem(searchKey);
     const result = localData ? JSON.parse(localData) : [];
@@ -95,7 +84,3 @@ function Main() {
   );
 }
 export default Main;
-function useGetDataNameQuery(searchTerm: string): { data: any; error: any; isLoading: any; refetch: any; } {
-  throw new Error('Function not implemented.');
-}
-

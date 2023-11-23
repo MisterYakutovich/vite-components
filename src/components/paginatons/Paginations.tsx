@@ -19,8 +19,6 @@ function Paginations({
   nextPage,
   prevPage,
 }: PaginationsProps) {
-  //const context = useContext<null | IContext>(ThemeContext);
-  // const numberPage = context!.currentPage!;
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setBeersPerPage(event.target.value);
   };

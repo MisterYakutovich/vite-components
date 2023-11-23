@@ -3,6 +3,9 @@ import Paginations from './components/paginatons/Paginations';
 import { useGetDataQuery } from './redux/services/apiBeers';
 import { useEffect, useState } from 'react';
 import { BeersArray } from './types/types';
+import { setCurrentBeers } from './redux/slices/stateSearchSlice';
+import { useDispatch } from 'react-redux';
+import { Loader } from './components/loading/Loader';
 
 export interface BeersSearch {
   name: string;
@@ -22,12 +25,14 @@ function Page({
   searchName,
   arrResult,
 }: PageProps) {
-  const [searchTerm] = useState('');
+  //  const [searchTerm] = useState('');
   const arr = [];
-  const { data, error, isLoading, refetch } = useGetDataQuery(searchTerm);
-  arr.push(data);
-  const itemsBeers = arr.flat();
 
+  const { data, error, isLoading } = useGetDataQuery(2);
+
+  arr.push(data);
+
+  const itemsBeers = arr.flat();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [beersPerPage, setBeersPerPage] = useState<string>('10');
   const lastBeersIndex = currentPage * +beersPerPage;
@@ -36,21 +41,19 @@ function Page({
 
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => prev - 1);
-
+  const dispatch = useDispatch();
   useEffect(() => {
-    // Обновление данных при изменении поиска или элементов на странице
-    refetch();
-  }, [searchTerm]);
+    // refetch();
+    dispatch(setCurrentBeers(currentBeers));
+  }, [currentBeers, dispatch]);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   if (error) {
-    return <div>Error!!!</div>;
+    return <div>`Oups... something went wrong...`</div>;
   }
-
-  console.log(itemsBeers);
 
   return (
     <>
@@ -68,7 +71,7 @@ function Page({
         arrResult={arrResult}
         handleClickStyle={handleClickStyle}
         isActive={isActive}
-        items={currentBeers}
+        itemsBeers={currentBeers}
       />
     </>
   );

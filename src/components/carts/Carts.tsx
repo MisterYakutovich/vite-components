@@ -1,7 +1,6 @@
 import './Carts.css';
 import CartItem from '../cartItem/CartItem';
 import { NavLink } from 'react-router-dom';
-
 import { BeersSearch } from '../../Page';
 import { BeersArray } from '../../types/types';
 
@@ -9,11 +8,11 @@ interface BeerProps {
   searchName: BeersSearch[];
   arrResult: BeersSearch[];
   isActive: boolean;
-  items: BeersArray[]; //| undefined;
+  itemsBeers: BeersArray[];
   handleClickStyle: (search: string) => void;
 }
 
-function Cart({ searchName, arrResult, isActive, items }: BeerProps) {
+function Cart({ searchName, arrResult, isActive, itemsBeers }: BeerProps) {
   if (searchName.length === 0) {
     searchName.push(...arrResult);
   }
@@ -22,7 +21,7 @@ function Cart({ searchName, arrResult, isActive, items }: BeerProps) {
     <section className="section-main">
       <div className="container">
         {searchName.length == 0
-          ? items?.map((i) => (
+          ? itemsBeers?.map((i: BeersSearch) => (
               <NavLink
                 key={i.id}
                 to={`ids=/${i.id}`}
