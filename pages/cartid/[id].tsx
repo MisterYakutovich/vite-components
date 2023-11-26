@@ -22,11 +22,14 @@ export async function getServerSideProps({ params }) {
 }
 
 function OnFullItem({ cart }) {
-  console.log(cart);
+ 
+ console.log(cart)
   const router = useRouter();
   const { id } = router.query;
   const { data } = useGetDataIdQuery(id);
-
+  const handleGoBack = () => {
+    router.back();
+  };
   const [isActive] = useState<boolean>(true);
   const [isLoading] = useState(false);
 
@@ -36,7 +39,7 @@ function OnFullItem({ cart }) {
         <Loader />
       ) : (
         <div className={styles.container_onfullitem}>
-          <div className={styles.close_onfullitem}>
+          <div className={styles.close_onfullitem} onClick={handleGoBack}>
             <svg
               width="32"
               height="32"
@@ -92,7 +95,7 @@ function OnFullItem({ cart }) {
         }}
       />
 
-      <CartsOnePage />
+      <CartsOnePage handleGoBack={handleGoBack}/>
     </section>
   );
 }

@@ -16,6 +16,6 @@ export const getServerSideProps = (async () => {
 export default function Home({
   data,
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
-  console.log(data);
+ 
   return <Main data={data} />;
 }

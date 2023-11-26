@@ -1,15 +1,19 @@
 import { RootState } from '../../redux/store';
-import styles from './CartOnePage.module.css';
+import styles from "./CartOnePage.module.css"
 import { useSelector } from 'react-redux';
 
-function CartsOnePage() {
+interface CartOnePageProps {
+  handleGoBack: () => void;
+}
+
+function CartsOnePage({ handleGoBack }: CartOnePageProps) {
   const currentBeers = useSelector(
     (state: RootState) => state.input.currentBeers
   );
 
   return (
     <section className={styles.section_cartsonepage}>
-      <div className={styles.cartsonepage_container}>
+      <div className={styles.cartsonepage_container} onClick={handleGoBack}>
         {currentBeers.map((i) => (
           <div key={i.id} className={styles.cartsonepage_cart}>
             <img
