@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-
 import Seach from '../search/Seach';
 import { STORAGE_KEY } from '../../model/consts';
 import { useSelector, useDispatch } from 'react-redux';
@@ -19,8 +18,11 @@ export interface PageBeers {
   loading: boolean;
   localData: string;
 }
+interface MainProps {
+  data: BeersArray[];
+}
 
-function Main() {
+function Main({ data }: MainProps) {
   const search = useSelector((state: RootState) => state.input.search);
 
   const dispatch = useDispatch();
@@ -80,8 +82,10 @@ function Main() {
         isActive={false}
         searchName={beer}
         arrResult={result}
+        data={data}
       />
     </>
   );
 }
+
 export default Main;

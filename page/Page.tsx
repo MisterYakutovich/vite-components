@@ -1,12 +1,9 @@
-
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import Carts from '@/components/carts/Carts';
 import Paginations from '@/components/paginatons/Paginations';
-import { useGetDataQuery } from '@/redux/services/apiBeers';
 import { BeersArray } from '@/types/types';
 import { setCurrentBeers } from '@/redux/slices/stateSearchSlice';
-import { Loader } from '@/components/loading/Loader';
 
 export interface BeersSearch {
   name: string;
@@ -18,21 +15,19 @@ interface PageProps {
   isActive: boolean;
   searchName: BeersArray[];
   arrResult: BeersArray[];
+  data: BeersArray[];
 }
 
-function Page({
+export default function Page({
   handleClickStyle,
   isActive,
   searchName,
   arrResult,
+  data,
 }: PageProps) {
-  //  const [searchTerm] = useState('');
   const arr = [];
 
-  const { data, error, isLoading } = useGetDataQuery(2);
-
   arr.push(data);
-
   const itemsBeers = arr.flat();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [beersPerPage, setBeersPerPage] = useState<string>('10');
@@ -44,17 +39,8 @@ function Page({
   const prevPage = () => setCurrentPage((prev) => prev - 1);
   const dispatch = useDispatch();
   useEffect(() => {
-    // refetch();
     dispatch(setCurrentBeers(currentBeers));
   }, [currentBeers, dispatch]);
-
-  if (isLoading) {
-    return <Loader />;
-  }
-
-  if (error) {
-    return <div>`Oups... something went wrong...`</div>;
-  }
 
   return (
     <>
@@ -77,4 +63,3 @@ function Page({
     </>
   );
 }
-export default Page;

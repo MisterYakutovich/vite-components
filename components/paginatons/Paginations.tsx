@@ -1,5 +1,4 @@
-//import './Paginatins.css';
-import styles from "./Paginations.module.css"
+import styles from './Paginations.module.css';
 
 import { BeersArray } from '../main/Main';
 
@@ -29,7 +28,7 @@ function Paginations({
         <input
           type="number"
           name="items"
-          id="items-per-page"
+          id={styles.items_per_page}
           min="1"
           max="80"
           value={beersPerPage}

@@ -1,9 +1,7 @@
-//import './Carts.css';
 import CartItem from '../cartItem/CartItem';
-//import { NavLink } from 'react-router-dom';
-
 import { BeersArray } from '../../types/types';
-import styles from "./Carts.module.css"
+import styles from './Carts.module.css';
+import Link from 'next/link';
 import { BeersSearch } from '@/page/Page';
 
 interface BeerProps {
@@ -24,16 +22,13 @@ function Cart({ searchName, arrResult, isActive, itemsBeers }: BeerProps) {
       <div className={styles.container}>
         {searchName.length == 0
           ? itemsBeers?.map((i: BeersSearch) => (
-              //<NavLink
-               // key={i.id}
-               // to={`ids=/${i.id}`}
-               // style={{ textDecoration: 'none' }}
-               //// className={({ isActive, isPending }) =>
-                 // isPending ? 'pending' : isActive ? 'active-linc' : ''
-               // }
-             // >
+              <Link
+                key={i.id}
+                href={`/cartid/${i.id}`}
+                style={{ textDecoration: 'none' }}
+              >
                 <CartItem key={i.id} i={i} isActive={isActive} />
-             //</NavLink>
+              </Link>
             ))
           : searchName.map((i) => (
               <CartItem key={i.id} i={i} isActive={isActive} />

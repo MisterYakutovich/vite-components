@@ -1,5 +1,5 @@
 //import './Seach.css';
-import styles from "./Seach.module.css"
+import styles from './Seach.module.css';
 
 interface SearchProps {
   enterHandler: (search: string) => void;
@@ -19,8 +19,11 @@ function Seach({
     <>
       {isActive ? (
         <div className={styles.container_row_newstyle}>
-          <div className={`${styles.inputField_newstyle} ${styles.colnewstyle} ${styles.s12newstyle}`}>
-            <input className={styles.search_input}
+          <div
+            className={`${styles.inputField_newstyle} ${styles.colnewstyle} ${styles.s12newstyle}`}
+          >
+            <input
+              className={styles.search_input}
               type="text_newstyle"
               value={search}
               onChange={handleChange}
@@ -38,7 +41,8 @@ function Seach({
       ) : (
         <div className={styles.row}>
           <div className={`${styles.input_field} ${styles.col} ${styles.s12}`}>
-            <input 
+            <input
+              className={styles.search_input}
               type="text"
               value={search}
               onChange={handleChange}
