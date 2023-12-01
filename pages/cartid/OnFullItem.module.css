@@ -1,6 +1,12 @@
+.section_cartid {
+  position: relative;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column-reverse;
+}
 .container_onfullitem {
   position: relative;
-  top: 200px;
+  top: 70px;
   height: 500px;
   width: 300px;
   margin-left: 900px;

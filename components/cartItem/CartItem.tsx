@@ -3,9 +3,7 @@ import styles from '../carts/Carts.module.css';
 
 export interface ProfilesProps {
   i: BeersSearch;
-  isActive: boolean;
 }
-
 function CartItem(props: ProfilesProps) {
   return (
     <div key={props.i.id} className={styles.card} data-testid="map">
@@ -15,7 +13,6 @@ function CartItem(props: ProfilesProps) {
         src={props.i.image_url}
         alt=""
       ></img>
-
       <p key={props.i.name} className={styles.card_title}>
         {props.i.name}
       </p>

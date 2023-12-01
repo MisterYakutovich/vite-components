@@ -1,5 +1,5 @@
 import { RootState } from '../../redux/store';
-import styles from "./CartOnePage.module.css"
+import styles from './CartOnePage.module.css';
 import { useSelector } from 'react-redux';
 
 interface CartOnePageProps {

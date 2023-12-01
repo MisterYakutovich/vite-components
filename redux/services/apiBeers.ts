@@ -1,5 +1,9 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
+export interface SearchQueryArgs {
+  page: number;
+  per_page: number;
+}
 export const beersApi = createApi({
   reducerPath: 'api',
   baseQuery: fetchBaseQuery({ baseUrl: 'https://api.punkapi.com/v2/beers' }),
@@ -14,3 +18,4 @@ export const beersApi = createApi({
 });
 
 export const { useGetDataQuery, useGetDataIdQuery } = beersApi;
+export const { getData, getDataId } = beersApi.endpoints;

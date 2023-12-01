@@ -70,20 +70,11 @@ function Main({ data }: MainProps) {
     <>
       <Seach
         enterHandler={enterHandler}
-        isActive={false}
         handleChange={handleChange}
         handleEnter={handleEnter}
         search={search}
       />
-      <Page
-        handleClickStyle={function (): void {
-          throw new Error('Function not implemented.');
-        }}
-        isActive={false}
-        searchName={beer}
-        arrResult={result}
-        data={data}
-      />
+      <Page searchName={beer} arrResult={result} data={data} />
     </>
   );
 }

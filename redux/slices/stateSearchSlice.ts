@@ -30,7 +30,5 @@ export const combainSlice = createSlice({
 });
 
 export const { setSearch, setBeer, setCurrentBeers } = combainSlice.actions;
-//export const {setBeer} = searchSlice.actions;
-//export const selectInputValue = (state: { input: string }) => state.input;
 
 export default combainSlice.reducer;

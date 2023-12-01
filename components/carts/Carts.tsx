@@ -7,12 +7,10 @@ import { BeersSearch } from '@/page/Page';
 interface BeerProps {
   searchName: BeersSearch[];
   arrResult: BeersSearch[];
-  isActive: boolean;
   itemsBeers: BeersArray[];
-  handleClickStyle: (search: string) => void;
 }
 
-function Cart({ searchName, arrResult, isActive, itemsBeers }: BeerProps) {
+function Cart({ searchName, arrResult, itemsBeers }: BeerProps) {
   if (searchName.length === 0) {
     searchName.push(...arrResult);
   }
@@ -27,12 +25,10 @@ function Cart({ searchName, arrResult, isActive, itemsBeers }: BeerProps) {
                 href={`/cartid/${i.id}`}
                 style={{ textDecoration: 'none' }}
               >
-                <CartItem key={i.id} i={i} isActive={isActive} />
+                <CartItem key={i.id} i={i} />
               </Link>
             ))
-          : searchName.map((i) => (
-              <CartItem key={i.id} i={i} isActive={isActive} />
-            ))}
+          : searchName.map((i) => <CartItem key={i.id} i={i} />)}
       </div>
     </section>
   );

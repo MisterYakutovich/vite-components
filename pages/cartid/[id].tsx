@@ -1,40 +1,36 @@
-import { useState } from 'react';
-
 import styles from './OnFullItem.module.css';
 import Seach from '../../components/search/Seach';
 import CartsOnePage from '../../components/cartOnePage/CartsOnePage';
-import { useGetDataIdQuery } from '../../redux/services/apiBeers';
+import { getDataId } from '../../redux/services/apiBeers';
 import { Loader } from '../../components/loading/Loader';
 import { useRouter } from 'next/router';
+import { ChangeEvent, KeyboardEvent } from 'react';
+import { wrapper } from '@/redux/store';
 
 interface BeersArray {
   description: string;
   name: string;
   image_url: string;
   id: string;
-  loading: boolean;
-}
-[];
-export async function getServerSideProps({ params }) {
-  const res = await fetch(`https://api.punkapi.com/v2/beers?${params.id}`);
-  const cart = await res.json();
-  return { props: { cart } };
 }
 
-function OnFullItem({ cart }) {
- 
- console.log(cart)
+export const getServerSideProps = wrapper.getServerSideProps(
+  (store) => async (context) => {
+    const { id } = context.query;
+    const { data, isLoading } = await store.dispatch(getDataId.initiate(id));
+    return { props: { data, isLoading } };
+  }
+);
+
+function OnFullItem({ data, isLoading }) {
   const router = useRouter();
-  const { id } = router.query;
-  const { data } = useGetDataIdQuery(id);
+console.log(isLoading)
   const handleGoBack = () => {
     router.back();
   };
-  const [isActive] = useState<boolean>(true);
-  const [isLoading] = useState(false);
 
   return (
-    <section>
+    <section className={styles.section_cartid}>
       {isLoading ? (
         <Loader />
       ) : (
@@ -82,20 +78,19 @@ function OnFullItem({ cart }) {
         </div>
       )}
       <Seach
-        isActive={isActive}
-        enterHandler={function (): void {
+        enterHandler={function (search: string): void {
           throw new Error('Function not implemented.');
         }}
         search={''}
-        handleChange={function (): void {
+        handleChange={function (e: ChangeEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         }}
-        handleEnter={function (): void {
+        handleEnter={function (event: KeyboardEvent<HTMLInputElement>): void {
           throw new Error('Function not implemented.');
         }}
       />
 
-      <CartsOnePage handleGoBack={handleGoBack}/>
+      <CartsOnePage handleGoBack={handleGoBack} />
     </section>
   );
 }

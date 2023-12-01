@@ -5,26 +5,19 @@ import Paginations from '@/components/paginatons/Paginations';
 import { BeersArray } from '@/types/types';
 import { setCurrentBeers } from '@/redux/slices/stateSearchSlice';
 
+
 export interface BeersSearch {
   name: string;
   image_url: string;
   id: string;
 }
 interface PageProps {
-  handleClickStyle: (search: string) => void;
-  isActive: boolean;
   searchName: BeersArray[];
   arrResult: BeersArray[];
   data: BeersArray[];
 }
 
-export default function Page({
-  handleClickStyle,
-  isActive,
-  searchName,
-  arrResult,
-  data,
-}: PageProps) {
+export default function Page({ searchName, arrResult, data }: PageProps) {
   const arr = [];
 
   arr.push(data);
@@ -34,7 +27,8 @@ export default function Page({
   const lastBeersIndex = currentPage * +beersPerPage;
   const firstBeersIndex = lastBeersIndex - +beersPerPage;
   const currentBeers = itemsBeers.slice(firstBeersIndex, lastBeersIndex);
-
+  
+  
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => prev - 1);
   const dispatch = useDispatch();
@@ -56,8 +50,6 @@ export default function Page({
       <Carts
         searchName={searchName}
         arrResult={arrResult}
-        handleClickStyle={handleClickStyle}
-        isActive={isActive}
         itemsBeers={currentBeers}
       />
     </>
