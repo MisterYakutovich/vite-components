@@ -1,11 +1,9 @@
+import { useContext } from 'react';
+import { IContext, ThemeContext } from './App';
 
-
-interface ImageUploaderComponentProps {
-  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-function ImageUploaderComponent({
-  handleImageChange,
-}: ImageUploaderComponentProps) {
+function ImageUploaderComponent() {
+  const context = useContext<null | IContext>(ThemeContext);
+  const handleImageChange = context?.handleImageChange;
   return (
     <div>
       <input type="file" accept="image/*" onChange={handleImageChange} />

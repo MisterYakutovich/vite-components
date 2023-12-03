@@ -1,10 +1,11 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Header from './Header';
 import ErrorPage from './ErrorPage';
-import ControllerForm, { IFormInput } from './ControllerForm';
+import ControllerForm from './ControllerForm';
 import UncontrollForm from './UncontrollForm';
-import { useSelector } from 'react-redux';
-import { RootState } from './redux/store';
+import { useDispatch } from 'react-redux';
+import { updatePhoto } from './redux/slices/formslice';
+import { createContext } from 'react';
 
 const router = createBrowserRouter([
   {
@@ -21,8 +22,28 @@ const router = createBrowserRouter([
     element: <UncontrollForm />,
   },
 ]);
+export interface IContext {
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+}
+export const ThemeContext = createContext<null | IContext>(null);
+export const ItemsProvaider = ThemeContext.Provider;
 function App() {
-  return <RouterProvider router={router} />;
+  const dispatch = useDispatch();
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files![0];
+    const reader = new FileReader();
+    reader.onload = (e) => {
+      const base64Image = e.target!.result as string;
+      dispatch(updatePhoto(base64Image));
+    };
+    reader.readAsDataURL(file);
+  };
+
+  return (
+    <ItemsProvaider value={{ handleImageChange }}>
+      <RouterProvider router={router} />
+    </ItemsProvaider>
+  );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 interface FormState {
-  firstName: string;
+  name: string;
   age: number;
   gender: string;
   email: string;
@@ -10,7 +10,7 @@ interface FormState {
 }
 
 const initialState: FormState = {
-  firstName: '',
+  name: '',
   age: 0,
   gender: '',
   email: '',
@@ -18,14 +18,14 @@ const initialState: FormState = {
   photo: '',
 };
 
-const formSlice = createSlice({
-  name: 'form',
+const uncontrollform = createSlice({
+  name: 'uncontrollform',
   initialState,
   reducers: {
-    updatePhoto: (state, action: PayloadAction<string>) => {
+    unupdatePhoto: (state, action: PayloadAction<string>) => {
       state.photo = action.payload;
     },
-    setFormData(state, action: PayloadAction<FormState>) {
+    setUnFormData(state, action: PayloadAction<FormState>) {
       return {
         ...state,
         ...action.payload,
@@ -34,6 +34,6 @@ const formSlice = createSlice({
   },
 });
 
-export const { setFormData, updatePhoto } = formSlice.actions;
+export const { setUnFormData, unupdatePhoto } = uncontrollform.actions;
 
-export default formSlice.reducer;
+export default uncontrollform.reducer;

@@ -1,12 +1,13 @@
 import * as yup from 'yup';
 import './ControllerForm.css';
-
-import { useForm, SubmitHandler, FormState } from 'react-hook-form';
+import { useForm, SubmitHandler } from 'react-hook-form';
 import { useDispatch, useSelector } from 'react-redux';
-import { setFormData, updatePhoto } from './redux/slices/formslice';
+import { setFormData } from './redux/slices/formslice';
 import { RootState } from './redux/store';
 import ImageUploaderComponent from './ImageUploaderComponent';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { useNavigate } from 'react-router';
+import { useEffect, useState } from 'react';
 
 enum GenderEnum {
   female = 'female',
@@ -27,19 +28,18 @@ export interface IFormInput {
 function ControllerForm() {
   const formData = useSelector((state: RootState) => state.form);
   console.log(formData);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files![0];
-    const reader = new FileReader();
-    reader.onload = (e) => {
-      const base64Image = e.target!.result as string;
-      dispatch(updatePhoto(base64Image)); 
-    };
-    reader.readAsDataURL(file);
-  };
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  useEffect(() => {
+    if (isSubmitted) {
+      navigate('/');
+    }
+  }, [isSubmitted, navigate]);
+
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     dispatch(setFormData(data));
+    setIsSubmitted(true);
   };
 
   const getCharacterValidationError = (str: string) => {
@@ -66,6 +66,18 @@ function ControllerForm() {
       .required()
       .oneOf([yup.ref('password')], 'Passwords must match'),
     photo: yup
+      .mixed()
+      .test(
+        'fileSize',
+        'File is too large',
+        (value) => !value || value[0].size <= 5000000
+      ) // 5MB
+      .test(
+        'fileType',
+        'Unsupported file format',
+        (value) => !value || ['image/jpeg', 'image/png'].includes(value[0].type)
+      ),
+    /*photo: yup
     .mixed()
     .test(
       "fileSize",
@@ -83,7 +95,7 @@ function ControllerForm() {
         return true;
       }
     )
-    .nullable(),
+    .nullable(),*/
     age: yup
       .number()
       .required('Введите свой возраст')
@@ -98,10 +110,10 @@ function ControllerForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     reset,
   } = useForm<IFormInput>({ resolver: yupResolver(schema) });
-  
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <label>First Name</label>
@@ -142,14 +154,14 @@ function ControllerForm() {
       <p>{errors.confirm_password?.message}</p>
       <br />
       <label>photo</label>
-      <ImageUploaderComponent handleImageChange={handleImageChange} />
+      <ImageUploaderComponent />
       <p>{errors.photo?.message}</p>
       <br />
       <label htmlFor="acceptTerms">Accept Terms & Conditions</label>
       <input type="checkbox" {...register('acceptTerms')} id="acceptTerms" />
       <p>{errors.acceptTerms?.message}</p>
 
-      <input type="submit" />
+      <input type="submit" disabled={!isValid} />
     </form>
   );
 }
