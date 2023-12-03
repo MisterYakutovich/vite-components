@@ -9,7 +9,7 @@ const store = configureStore({
   },
 });
 
-export type RootState = ReturnType<typeof store.getState>; // определите тип корневого состояния
-export type AppDispatch = typeof store.dispatch; // определите тип диспетчера приложения
+export type RootState = ReturnType<typeof store.getState>; 
+export type AppDispatch = typeof store.dispatch; 
 
 export default store;

@@ -23,8 +23,8 @@ export interface IFormInput {
 }
 
 const UncontrollForm = () => {
-  const formData = useSelector((state: RootState) => state.uncontrollform);
-  console.log(formData);
+  const formData2 = useSelector((state: RootState) => state.uncontrollform);
+  console.log(formData2);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const context = useContext<null | IContext>(ThemeContext);

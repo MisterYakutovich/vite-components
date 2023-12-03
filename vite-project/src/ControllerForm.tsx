@@ -1,9 +1,8 @@
 import * as yup from 'yup';
 import './ControllerForm.css';
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { setFormData } from './redux/slices/formslice';
-import { RootState } from './redux/store';
 import ImageUploaderComponent from './ImageUploaderComponent';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useNavigate } from 'react-router';
@@ -26,8 +25,7 @@ export interface IFormInput {
 }
 
 function ControllerForm() {
-  const formData = useSelector((state: RootState) => state.form);
-  console.log(formData);
+  
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -161,7 +159,7 @@ function ControllerForm() {
       <input type="checkbox" {...register('acceptTerms')} id="acceptTerms" />
       <p>{errors.acceptTerms?.message}</p>
 
-      <input type="submit" disabled={!isValid} />
+      <input type="submit"  />
     </form>
   );
 }
