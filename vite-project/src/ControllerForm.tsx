@@ -75,25 +75,7 @@ function ControllerForm() {
         'Unsupported file format',
         (value) => !value || ['image/jpeg', 'image/png'].includes(value[0].type)
       ),
-    /*photo: yup
-    .mixed()
-    .test(
-      "fileSize",
-      "File is too large",
-      (value) =>Array.isArray(value) && value[0]?.size <= 5000000// value?.[0]?.size <= 5000000 // 5MB
-    )
-    .test(
-      "fileType",
-      "Unsupported file format",
-      (value) => {
-        if (Array.isArray(value)) {
-          const allowedTypes = ["image/jpg", "image/png"];
-          return allowedTypes.includes(value[0]?.type);
-        }
-        return true;
-      }
-    )
-    .nullable(),*/
+    
     age: yup
       .number()
       .required('Введите свой возраст')
@@ -108,7 +90,7 @@ function ControllerForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
     reset,
   } = useForm<IFormInput>({ resolver: yupResolver(schema) });
 
