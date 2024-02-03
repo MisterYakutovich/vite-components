@@ -13,7 +13,7 @@ const rootReducer = combineReducers({
   beer: stateSearch,
   currentBeers: stateSearch,
 });
-export const setupStore = (preloadedState?: PreloadedState<RootState>) => {
+export const setupStore: any = (preloadedState?: PreloadedState<RootState>) => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>

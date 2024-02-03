@@ -1,16 +1,33 @@
+import { useEffect } from 'react';
 import { RootState } from '../../redux/store';
 import styles from './CartOnePage.module.css';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setCurrentBeers } from '@/redux/slices/stateSearchSlice';
 
 interface CartOnePageProps {
   handleGoBack: () => void;
 }
-
+const STORAGE_KEY = 'currentBeers'; // ключ localStorage
 function CartsOnePage({ handleGoBack }: CartOnePageProps) {
   const currentBeers = useSelector(
     (state: RootState) => state.input.currentBeers
   );
+  const dispatch = useDispatch();
+  useEffect(() => {
+    if (currentBeers.length > 0) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentBeers));
+    }
+  }, [currentBeers]);
 
+  useEffect(() => {
+    const storedBeers = localStorage.getItem(STORAGE_KEY);
+    if (storedBeers) {
+      const parsedBeers = JSON.parse(storedBeers);
+      dispatch(setCurrentBeers(parsedBeers));
+    }
+  }, [dispatch]);
+
+  console.log(currentBeers);
   return (
     <section className={styles.section_cartsonepage}>
       <div className={styles.cartsonepage_container} onClick={handleGoBack}>

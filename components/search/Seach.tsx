@@ -1,17 +1,38 @@
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './Seach.module.css';
+import { RootState } from '@/redux/store';
+import { setSearch } from '@/redux/slices/stateSearchSlice';
+import { useEffect } from 'react';
 
 interface SearchProps {
   enterHandler: (search: string) => void;
-  search: string;
-  handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  handleEnter: (event: React.KeyboardEvent<HTMLInputElement>) => void;
 }
-function Seach({
-  enterHandler,
-  handleChange,
-  handleEnter,
-  search,
-}: SearchProps) {
+function Seach({ enterHandler }: SearchProps) {
+  const search = useSelector((state: RootState) => state.input.search);
+
+  const dispatch = useDispatch();
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputSearch = e.target.value;
+
+    dispatch(setSearch(inputSearch));
+  };
+  const handleEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      enterHandler(search);
+    }
+  };
+  const searchKey = 'searchInput';
+
+  useEffect(() => {
+    const savedSearch = localStorage.getItem(searchKey);
+    if (savedSearch) {
+      dispatch(setSearch(savedSearch));
+    }
+  }, [searchKey, dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem(searchKey, search);
+  }, [search, searchKey]);
   return (
     <>
       <div className={styles.row}>

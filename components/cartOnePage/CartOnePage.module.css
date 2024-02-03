@@ -1,6 +1,6 @@
 .cartsonepage_container {
   position: absolute;
-  top: 200px;
+  top: 70px;
   display: grid;
   grid-template-columns: repeat(4, 150px);
   grid-template-rows: repeat(3, 350px);

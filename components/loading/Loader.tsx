@@ -1,4 +1,3 @@
-//import './Loader.css';
 import styles from './Loader.module.css';
 
 export const Loader = () => (

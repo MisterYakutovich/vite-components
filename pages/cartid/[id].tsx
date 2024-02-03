@@ -1,10 +1,8 @@
 import styles from './OnFullItem.module.css';
-import Seach from '../../components/search/Seach';
 import CartsOnePage from '../../components/cartOnePage/CartsOnePage';
 import { getDataId } from '../../redux/services/apiBeers';
 import { Loader } from '../../components/loading/Loader';
 import { useRouter } from 'next/router';
-import { ChangeEvent, KeyboardEvent } from 'react';
 import { wrapper } from '@/redux/store';
 
 interface BeersArray {
@@ -24,7 +22,6 @@ export const getServerSideProps = wrapper.getServerSideProps(
 
 function OnFullItem({ data, isLoading }) {
   const router = useRouter();
-console.log(isLoading)
   const handleGoBack = () => {
     router.back();
   };
@@ -77,18 +74,6 @@ console.log(isLoading)
           ))}
         </div>
       )}
-      <Seach
-        enterHandler={function (search: string): void {
-          throw new Error('Function not implemented.');
-        }}
-        search={''}
-        handleChange={function (e: ChangeEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        }}
-        handleEnter={function (event: KeyboardEvent<HTMLInputElement>): void {
-          throw new Error('Function not implemented.');
-        }}
-      />
 
       <CartsOnePage handleGoBack={handleGoBack} />
     </section>

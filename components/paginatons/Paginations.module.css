@@ -10,15 +10,15 @@
 }
 #items_per_page {
   height: 25px;
+  margin-right: 10px;
 }
 .change_button {
-  border-radius: 8px;
   border: 1px solid gray;
   padding: 0.6em 1.2em;
   font-size: 15px;
   font-weight: 500;
   font-family: inherit;
-  cursor: pointer;
+
   color: aqua;
   transition: border-color 0.25s;
 }

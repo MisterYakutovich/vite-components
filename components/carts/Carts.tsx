@@ -11,10 +11,12 @@ interface BeerProps {
 }
 
 function Cart({ searchName, arrResult, itemsBeers }: BeerProps) {
-  if (searchName.length === 0) {
-    searchName.push(...arrResult);
-  }
+  // if (searchName.length === 0) {
+  //  searchName.push(...arrResult);
+  // }
 
+  console.log(searchName);
+  console.log(arrResult);
   return (
     <section className={styles.section_main}>
       <div className={styles.container}>

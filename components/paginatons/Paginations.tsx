@@ -33,12 +33,9 @@ function Paginations({
           max="80"
           value={beersPerPage}
           onChange={handleChange}
-          // onKeyDown={handleEnter}
           placeholder="Number of cards per page"
         />
-        <button type="submit" className={styles.change_button}>
-          Change items number
-        </button>
+        <p className={styles.change_button}>Change items number</p>
       </form>
       <button
         className={styles.button}

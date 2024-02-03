@@ -5,7 +5,6 @@ import Paginations from '@/components/paginatons/Paginations';
 import { BeersArray } from '@/types/types';
 import { setCurrentBeers } from '@/redux/slices/stateSearchSlice';
 
-
 export interface BeersSearch {
   name: string;
   image_url: string;
@@ -27,8 +26,7 @@ export default function Page({ searchName, arrResult, data }: PageProps) {
   const lastBeersIndex = currentPage * +beersPerPage;
   const firstBeersIndex = lastBeersIndex - +beersPerPage;
   const currentBeers = itemsBeers.slice(firstBeersIndex, lastBeersIndex);
-  
-  
+
   const nextPage = () => setCurrentPage((prev) => prev + 1);
   const prevPage = () => setCurrentPage((prev) => prev - 1);
   const dispatch = useDispatch();
