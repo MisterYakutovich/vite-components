@@ -1,28 +1,25 @@
-import { BeersSearch } from '../../Page';
+import { BeersSearch } from '@/src/page/Page';
+import styles from '../carts/Carts.module.css';
+
+
 
 export interface ProfilesProps {
   i: BeersSearch;
-  isActive: boolean;
 }
 
 function CartItem(props: ProfilesProps) {
-  function handleClickStyle():
-    | import('react').MouseEventHandler<HTMLImageElement>
-    | undefined {
-    throw new Error('Function not implemented.');
-  }
-
+ 
   return (
-    <div key={props.i.id} className="card" data-testid="map">
+    <div key={props.i.id} className={styles.card} data-testid="map">
       <img
-        className="card_img"
+        className={styles.card_img}
         key={props.i.image_url}
         src={props.i.image_url}
         alt=""
-        onClick={handleClickStyle}
+       // width={100}
+       // height={350}
       ></img>
-
-      <p key={props.i.name} className="card_title">
+      <p key={props.i.name} className={styles.card_title}>
         {props.i.name}
       </p>
     </div>

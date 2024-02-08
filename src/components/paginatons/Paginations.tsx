@@ -1,6 +1,6 @@
-import './Paginatins.css';
+import styles from './Paginations.module.css';
 
-import { BeersArray } from '../main/Main';
+import { BeersArray } from '../home/Home';
 
 interface PaginationsProps {
   setBeersPerPage: (event: string) => void;
@@ -23,29 +23,26 @@ function Paginations({
     setBeersPerPage(event.target.value);
   };
   return (
-    <div className="navigation">
+    <div className={styles.navigation}>
       <form>
         <input
           type="number"
           name="items"
-          id="items-per-page"
+          id={styles.items_per_page}
           min="1"
           max="80"
           value={beersPerPage}
           onChange={handleChange}
-          // onKeyDown={handleEnter}
           placeholder="Number of cards per page"
         />
-        <button type="submit" className="change_button">
-          Change items number
-        </button>
+        <p className={styles.change_button}>Change items number</p>
       </form>
       <button
-        className="button"
+        className={styles.button}
         onClick={prevPage}
         disabled={currentPage === 1}
       >
-        <div className="two">
+        <div className={styles.two}>
           <svg
             width="10"
             height="11"
@@ -61,16 +58,16 @@ function Paginations({
         </div>
       </button>
 
-      <div className="button_arrow_right_number">
+      <div className={styles.button_arrow_right_number}>
         <h4>{currentPage}</h4>
       </div>
 
       <button
-        className="button"
+        className={styles.button}
         onClick={nextPage}
         disabled={currentPage >= itemsBeers.length / +beersPerPage}
       >
-        <div className="two">
+        <div className={styles.two}>
           <svg
             width="10"
             height="11"
